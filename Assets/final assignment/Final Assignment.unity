@@ -1058,6 +1058,7 @@ MonoBehaviour:
   selectedSize: 1.2
   growEffect: {fileID: 108946577}
   floatEffect: {fileID: 99374995}
+  toadEffect: {fileID: 797623718}
 --- !u!4 &776539087
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,7 +1118,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1179,6 +1180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToadEffect
   growSize: 1.5
   floatHeight: 2
+  toadSprite: {fileID: 797623716}
+  glowSprite: {fileID: 21300000, guid: 583f312c1bca94e97ac8b2ac3fcaeb42, type: 3}
+  popSprite: {fileID: 21300000, guid: 519534a897a8841f3b33e208bd3b91ae, type: 3}
 --- !u!1 &952485485
 GameObject:
   m_ObjectHideFlags: 0

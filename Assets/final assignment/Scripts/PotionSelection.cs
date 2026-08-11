@@ -23,6 +23,7 @@ public class PotionSelection : MonoBehaviour
     // References to potion effects
     public PotionEffect growEffect;
     public PotionEffect floatEffect;
+    public ToadEffect toadEffect;
 
 
     void Start()
@@ -86,10 +87,11 @@ public class PotionSelection : MonoBehaviour
     {
         if (context.performed)
         {
-            // All three potions
+            //all three potions
             if (blueSelected && redSelected && yellowSelected)
             {
                 Debug.Log("BLUE + RED + YELLOW = POP");
+                toadEffect.Pop();
             }
 
             // Blue + Red = Grow
@@ -112,22 +114,26 @@ public class PotionSelection : MonoBehaviour
             else if (blueSelected && yellowSelected)
             {
                 Debug.Log("BLUE + YELLOW = GLOW");
+                toadEffect.Glow();
             }
 
-            // Individual potions
+            //individual potions
             else if (blueSelected)
             {
                 Debug.Log("BLUE");
+                toadEffect.Blue();
             }
 
             else if (redSelected)
             {
                 Debug.Log("RED");
+                toadEffect.Red();
             }
 
             else if (yellowSelected)
             {
                 Debug.Log("YELLOW");
+                toadEffect.Yellow();
             }
 
             else
