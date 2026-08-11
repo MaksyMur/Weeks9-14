@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PotionSelection : MonoBehaviour
@@ -15,15 +13,18 @@ public class PotionSelection : MonoBehaviour
     public Transform redPotion;
     public Transform yellowPotion;
 
-    public float selectedSize = 1.2f;//size of the potion when selected
+    //size of the potion when selected
+    public float selectedSize = 1.2f;
 
-    Vector3 originalBlueScale;
-    Vector3 originalRedScale;
-    Vector3 originalYellowScale;
-  
+    private Vector3 originalBlueScale;
+    private Vector3 originalRedScale;
+    private Vector3 originalYellowScale;
+
+    // References to potion effects
+    public PotionEffect growEffect;
+    public PotionEffect floatEffect;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         originalBlueScale = bluePotion.localScale;
@@ -31,19 +32,12 @@ public class PotionSelection : MonoBehaviour
         originalYellowScale = yellowPotion.localScale;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
+
     //called by the Blue Potion UI button
     public void SelectBlue()
     {
-        //switch between selected and not selected
         blueSelected = !blueSelected;
 
-        //change the potion size to show its selection
         if (blueSelected)
         {
             bluePotion.localScale = originalBlueScale * selectedSize;
@@ -54,11 +48,12 @@ public class PotionSelection : MonoBehaviour
         }
     }
 
+
     //called by the Red Potion UI button
     public void SelectRed()
     {
         redSelected = !redSelected;
-        //change the potion size to show its selection
+
         if (redSelected)
         {
             redPotion.localScale = originalRedScale * selectedSize;
@@ -69,11 +64,12 @@ public class PotionSelection : MonoBehaviour
         }
     }
 
-    //called by the Yellow Potion UI button
+
+    // called by the Yellow Potion UI button
     public void SelectYellow()
     {
         yellowSelected = !yellowSelected;
-        //change the potion size to show its selection
+
         if (yellowSelected)
         {
             yellowPotion.localScale = originalYellowScale * selectedSize;
@@ -84,17 +80,60 @@ public class PotionSelection : MonoBehaviour
         }
     }
 
-    public void UsePotion(InputAction.CallbackContext context)
-{
-    // Performed makes sure the function runs only once per button press
-    if (context.performed)
-    {
-        Debug.Log("Potion used!");
 
-        //shows which potions are currently selected
-        Debug.Log("Blue: " + blueSelected);
-        Debug.Log("Red: " + redSelected);
-        Debug.Log("Yellow: " + yellowSelected);
+    //called when the Interact input is performed
+    public void UsePotion(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            // All three potions
+            if (blueSelected && redSelected && yellowSelected)
+            {
+                Debug.Log("BLUE + RED + YELLOW = POP");
+            }
+
+            // Blue + Red = Grow
+            else if (blueSelected && redSelected)
+            {
+                Debug.Log("BLUE + RED = GROW");
+
+                growEffect.UseEffect();
+            }
+
+            // Red + Yellow = Float
+            else if (redSelected && yellowSelected)
+            {
+                Debug.Log("RED + YELLOW = FLOAT");
+
+                floatEffect.UseEffect();
+            }
+
+            // Blue + Yellow = Glow
+            else if (blueSelected && yellowSelected)
+            {
+                Debug.Log("BLUE + YELLOW = GLOW");
+            }
+
+            // Individual potions
+            else if (blueSelected)
+            {
+                Debug.Log("BLUE");
+            }
+
+            else if (redSelected)
+            {
+                Debug.Log("RED");
+            }
+
+            else if (yellowSelected)
+            {
+                Debug.Log("YELLOW");
+            }
+
+            else
+            {
+                Debug.Log("No potion selected");
+            }
+        }
     }
-}
 }
