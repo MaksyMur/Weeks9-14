@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ToadEffect : MonoBehaviour
 {
@@ -65,11 +66,25 @@ public class ToadEffect : MonoBehaviour
 
     //moves the toad upward
     public void Float()
-    {
-        transform.position += Vector3.up * floatHeight;
+{
+    StartCoroutine(FloatUp());
+}
 
-        Debug.Log("Toad floats!");
+//slowly moves the toad upward
+IEnumerator FloatUp()
+{
+    float targetHeight = transform.position.y + floatHeight;
+
+    //keep moving until the toad reaches the target height
+    while (transform.position.y < targetHeight)
+    {
+        transform.position += Vector3.up * Time.deltaTime;
+
+        yield return null;
     }
+
+    Debug.Log("Toad stopped floating!");
+}
 
     public void Glow()
     {
